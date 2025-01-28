@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+//import { v4 as uuidv4 } from "uuid";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TextField from "@mui/material/TextField";
 import {
@@ -28,22 +28,46 @@ export function SnackCreation() {
   const [hora, setHora] = useState("");
   const [dentroDaDieta, setDentroDaDieta] = useState<boolean | null>(null);
   const [isPositiveSnack, setIsPositiveSnack] = useState<boolean | null>(null); // Novo estado para controlar a exibição do SnackPositive
+  const [botaoClicado, setBotaoClicado] = useState<string | null>(null);
+
+  // Estados de erro
+  const [errors, setErrors] = useState({
+    nome: false,
+    descricao: false,
+    dia: false,
+  });
 
   const marcarDentroDaDieta = () => {
     setDentroDaDieta(true); // Define dentroDaDieta como true ao clicar no botão "Sim"
+    setBotaoClicado("dentro");
   };
 
   const marcarForaDaDieta = () => {
     setDentroDaDieta(false); // Define dentroDaDieta como false ao clicar no botão "Não"
+    setBotaoClicado("fora");
   };
 
   const goToHome = () => {
     navigate("/Home");
   };
 
+  const validarCampos = () => {
+    const newErrors = {
+      nome: nome.trim() === "",
+      descricao: descricao.trim() === "",
+      dia: dia.trim() === "",
+    };
+    setErrors(newErrors);
+    return !Object.values(newErrors).some((error) => error); // Retorna true se todos os campos estão válidos
+  };
+
   const cadastrarRefeição = async () => {
+    if (!validarCampos()) {
+      return;
+    }
+
     const novaRefeicao = {
-      id: uuidv4(), // Gera um UUID
+      // id: uuidv4(), // Gera um UUID
       nome,
       descricao,
       dia,
@@ -91,6 +115,8 @@ export function SnackCreation() {
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             inputProps={{ maxLength: 70 }}
+            error={errors.nome}
+            helperText={errors.nome ? "O campo Nome é obrigatório." : ""}
           />
           Descrição
           <TextField
@@ -100,6 +126,10 @@ export function SnackCreation() {
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
             inputProps={{ maxLength: 200 }}
+            error={errors.descricao}
+            helperText={
+              errors.descricao ? "O campo Descrição é obrigatório." : ""
+            }
           />
           <BoxData>
             <div>
@@ -121,12 +151,21 @@ export function SnackCreation() {
               />
             </div>
           </BoxData>
+          {errors.dia && (
+                <p style={{ color: "red", fontSize: "0.75rem" }}>
+                  O campo Data é obrigatório.
+                </p>
+              )}
           <BoxButton>
             <div>
               <p>Está dentro da dieta?</p>
               <Button
                 className="buttonWidth"
                 size="small"
+                style={{
+                  backgroundColor:
+                    botaoClicado === "dentro" ? "#CBE4B4" : "#eff0f0",
+                }}
                 onClick={marcarDentroDaDieta}
               >
                 Sim
@@ -136,6 +175,10 @@ export function SnackCreation() {
               <Button
                 className="buttonDoisWidth"
                 size="small"
+                style={{
+                  backgroundColor:
+                    botaoClicado === "fora" ? "#F3BABD" : "#eff0f0",
+                }}
                 onClick={marcarForaDaDieta}
               >
                 Não

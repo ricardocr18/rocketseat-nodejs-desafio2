@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 
 export const ModalContainer = styled.div`
   margin-top: 75px;
-  height: 650px;
+  min-height: 650px;
   width: 350px;
   border: 1px solid black;
   border-radius: 10px;
@@ -134,8 +134,9 @@ export const ButtonClick = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 45px; /* Adiciona a distância de 15px do elemento acima */
+  margin-top: 35px; /* Adiciona a distância de 15px do elemento acima */
   margin-left: -12px;
+  margin-bottom: 15px;
 `;
 
 export const StyledButton = styled(Button)`
