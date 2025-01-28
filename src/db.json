@@ -1,0 +1,39 @@
+{
+  "registros": [
+    {
+      "Nome": "Salada de Frutas",
+      "Descricao": "Mistura de frutas frescas com mel e granola",
+      "data": "10/01/2024",
+      "hora": "08:30",
+      "DentroDaDieta": "Sim"
+    },
+    {
+      "Nome": "Pizza Margherita",
+      "Descricao": "Pizza tradicional com molho de tomate, muçarela e manjericão",
+      "data": "05/01/2024",
+      "hora": "19:00",
+      "DentroDaDieta": "Não"
+    },
+    {
+      "Nome": "Sopa de Legumes",
+      "Descricao": "Sopa leve com diversos legumes",
+      "data": "05/01/2024",
+      "hora": "12:15",
+      "DentroDaDieta": "Sim"
+    },
+    {
+      "Nome": "Bife com Batata Frita", 
+      "Descricao": "Bifé suculento com batatas fritas crocantes",
+      "data": "07/01/2024",
+      "hora": "12:45",
+      "DentroDaDieta": "Não"
+    },
+    {
+      "Nome": "Hambúrguer com Batatas Fritas",
+      "Descricao": "Hambúrguer suculento com batatas fritas crocantes",
+      "data": "10/01/2024",
+      "hora": "20:45",
+      "DentroDaDieta": "Não"
+    }
+  ]
+}

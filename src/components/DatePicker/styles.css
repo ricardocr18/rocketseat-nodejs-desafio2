@@ -1,0 +1,18 @@
+.date-picker {
+    width: 120px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 1px;
+    border: 1px solid #bebebe;
+    color: #333;
+  }
+  
+  .date-picker:focus {
+    outline: none;
+    border: 2px solid #333;
+  }
+  
+  .date-picker-label {
+    margin-right: 1px;
+  }
