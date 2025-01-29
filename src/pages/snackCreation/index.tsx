@@ -1,4 +1,6 @@
 //import { v4 as uuidv4 } from "uuid";
+import dayjs from "dayjs"; // Biblioteca para manipulação de datas
+import "dayjs/locale/pt-br";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TextField from "@mui/material/TextField";
 import {
@@ -29,6 +31,10 @@ export function SnackCreation() {
   const [dentroDaDieta, setDentroDaDieta] = useState<boolean | null>(null);
   const [isPositiveSnack, setIsPositiveSnack] = useState<boolean | null>(null); // Novo estado para controlar a exibição do SnackPositive
   const [botaoClicado, setBotaoClicado] = useState<string | null>(null);
+
+  const formatarDataParaBrasileiro = (data: string) => {
+    return dayjs(data).format("DD/MM/YYYY"); // Converte para o formato desejado
+  };
 
   // Estados de erro
   const [errors, setErrors] = useState({
@@ -136,7 +142,12 @@ export function SnackCreation() {
               <p>Data</p>
               <DatePicker
                 value={dia}
-                onChange={(e) => setDia(e.target.value)}
+                onChange={(e) => {
+                  const dataFormatada = formatarDataParaBrasileiro(
+                    e.target.value
+                  );
+                  setDia(dataFormatada);
+                }}
                 placeholder="Data"
               />
             </div>
@@ -152,10 +163,10 @@ export function SnackCreation() {
             </div>
           </BoxData>
           {errors.dia && (
-                <p style={{ color: "red", fontSize: "0.75rem" }}>
-                  O campo Data é obrigatório.
-                </p>
-              )}
+            <p style={{ color: "red", fontSize: "0.75rem" }}>
+              O campo Data é obrigatório.
+            </p>
+          )}
           <BoxButton>
             <div>
               <p>Está dentro da dieta?</p>
