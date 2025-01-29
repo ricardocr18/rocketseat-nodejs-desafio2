@@ -10,6 +10,7 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import { Modal } from "@mui/material";
 import { useState } from "react";
+import { deleteRefeicao } from "../../services/apiService";
 
 export function Consult() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export function Consult() {
     navigate(-1);
   };
 
-  const deletarRefeicao = async () => {
+  /* const deletarRefeicao = async () => {
     try {
       const response = await fetch("http://localhost:3000/refeicao", {
         method: "DELETE",
@@ -40,6 +41,20 @@ export function Consult() {
       } else {
         console.error("Erro ao deletar refeição:", response.status);
       }
+    } catch (error) {
+      console.error("Erro ao deletar refeição:", error);
+    }
+  }; */
+
+  const deletarRefeicao = async () => {
+    try {
+      if (!refeicao.id) {
+        console.error("Erro: ID da refeição não encontrado.");
+        return;
+      }
+      await deleteRefeicao(refeicao.id);
+      console.log("Refeição deletada com sucesso");
+      navigate("/home");
     } catch (error) {
       console.error("Erro ao deletar refeição:", error);
     }
