@@ -8,7 +8,6 @@ import {
   Meals,
   ModalHeader,
   OpenImage,
-  
   StyledBox,
 } from "./style";
 import { useRefeicoes } from "../../util/context/RefeicoesContext";
@@ -94,7 +93,14 @@ export function Home() {
     );
   };
 
+
   const refeicoesAgrupadas = agruparRefeicoesPorData(refeicoes);
+  const datasOrdenadas = Object.keys(refeicoesAgrupadas).sort((a, b) => {
+    // Converter para formato ISO para garantir ordenação correta
+    const dataA = a.split("/").reverse().join("-"); // Convertendo de dd/mm/yyyy para yyyy-mm-dd
+    const dataB = b.split("/").reverse().join("-");
+    return new Date(dataA).getTime() - new Date(dataB).getTime();
+  });
 
   useEffect(() => {
     obterRefeicoesDoServidor();
@@ -184,30 +190,28 @@ export function Home() {
             <p>Não possui dados cadastrados</p>
           ) : (
             <Meals>
-              {Object.entries(refeicoesAgrupadas).map(
-                ([data, refeicoesDoDia]) => (
-                  <div key={data}>
-                    <p className="data">{data}</p>
-                    {refeicoesDoDia.map((refeicao) => (
-                      <StyledBox
-                        key={refeicao.nome}
-                        onClick={() => gotoConsult(refeicao)}
-                      >
-                        <span>
-                          {refeicao.hora} | {refeicao.nome}
-                        </span>
-                        {refeicao.dentroDaDieta === "true" ? (
-                          <div>
-                            <FiberManualRecordIcon style={{ color: "green" }} />
-                          </div>
-                        ) : (
-                          <FiberManualRecordIcon style={{ color: "red" }} />
-                        )}
-                      </StyledBox>
-                    ))}
-                  </div>
-                )
-              )}
+              {datasOrdenadas.map((data) => (
+                <div key={data}>
+                  <p className="data">{data}</p>
+                  {refeicoesAgrupadas[data].map((refeicao) => (
+                    <StyledBox
+                      key={refeicao.nome}
+                      onClick={() => gotoConsult(refeicao)}
+                    >
+                      <span>
+                        {refeicao.hora} | {refeicao.nome}
+                      </span>
+                      {refeicao.dentroDaDieta === "true" ? (
+                        <div>
+                          <FiberManualRecordIcon style={{ color: "green" }} />
+                        </div>
+                      ) : (
+                        <FiberManualRecordIcon style={{ color: "red" }} />
+                      )}
+                    </StyledBox>
+                  ))}
+                </div>
+              ))}
             </Meals>
           )}
         </MealsContainer>
