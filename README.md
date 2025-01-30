@@ -1,5 +1,6 @@
 # rocketseat-nodejs-desafio2
-Nesse desafio foi desenvolvido uma API para controle de dieta diária, a Daily Diet API
+- Nesse desafio foi desenvolvido uma API para controle de dieta diária, a Daily Diet API
+- Segue orientações completas do curso Rocketseat sobre o desafio: https://efficient-sloth-d85.notion.site/Desafio-02-be7cdb37aaf74ba898bc6336427fa410
 
 ## Sobre o Desafio
 
@@ -24,4 +25,13 @@ Nesse desafio foi desenvolvido uma API para controle de dieta diária, a Daily D
     - Melhor sequência de refeições dentro da dieta
 - O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
 
+## Alguns prints do aplicativo
+
+- tela Home
 ![alt text](image.png)
+
+- tela apresentação de estatística do app referente as refeições
+![alt text](image-1.png)
+
+- tela dos dados da rafeição, onde podemos editar e excluir a refeição
+![alt text](image-2.png)
