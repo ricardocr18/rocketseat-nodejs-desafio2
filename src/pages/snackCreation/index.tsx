@@ -32,9 +32,9 @@ export function SnackCreation() {
   const [isPositiveSnack, setIsPositiveSnack] = useState<boolean | null>(null); // Novo estado para controlar a exibição do SnackPositive
   const [botaoClicado, setBotaoClicado] = useState<string | null>(null);
 
-  const formatarDataParaBrasileiro = (data: string) => {
+  /* const formatarDataParaBrasileiro = (data: string) => {
     return dayjs(data).format("DD/MM/YYYY"); // Converte para o formato desejado
-  };
+  }; */
 
   // Estados de erro
   const [errors, setErrors] = useState({
@@ -55,7 +55,7 @@ export function SnackCreation() {
 
   const goToHome = () => {
     navigate("/Home");
-  };
+  };  
 
   const validarCampos = () => {
     const newErrors = {
@@ -71,16 +71,17 @@ export function SnackCreation() {
     if (!validarCampos()) {
       return;
     }
-
+  
+    const dataFormatadaParaEnvio = dayjs(dia).format("DD/MM/YYYY");
+  
     const novaRefeicao = {
-      // id: uuidv4(), // Gera um UUID
       nome,
       descricao,
-      dia,
+      dia: dataFormatadaParaEnvio, // Envia a data no formato correto
       hora,
       dentroDaDieta: dentroDaDieta ? "true" : "false",
     };
-
+  
     try {
       const data = await createRefeicao(novaRefeicao);
       setRefeicoesAtualizadas((prev) => [...prev, data]); // Atualiza o estado global com a nova refeição
@@ -91,6 +92,7 @@ export function SnackCreation() {
       setIsPositiveSnack(false);
     }
   };
+  
 
   const limparCampos = () => {
     setNome("");
@@ -143,10 +145,8 @@ export function SnackCreation() {
               <DatePicker
                 value={dia}
                 onChange={(e) => {
-                  const dataFormatada = formatarDataParaBrasileiro(
-                    e.target.value
-                  );
-                  setDia(dataFormatada);
+                  const dataISO = e.target.value; // O formato esperado é "YYYY-MM-DD"
+                  setDia(dataISO); // Armazena no estado no formato correto
                 }}
                 placeholder="Data"
               />

@@ -17,17 +17,6 @@ export const fetchRefeicoes = async (): Promise<Refeicao[]> => {
   return response.json();
 };
 
-// APAGAR antes de subir para o GIT
-const testeRefeicoes = async () => {
-  try {
-    const refeicoes = await fetchRefeicoes()
-    console.log("Refeições na base de dados", refeicoes)
-  }catch (error){
-    console.log("error ao buscar refeções", error)
-  }
-}
-testeRefeicoes()
-
 // Fetch a single refeição by ID
 export const fetchRefeicaoById = async (id: string): Promise<Refeicao> => {
   const response = await fetch(`${API_URL}/${id}`, { method: "GET" });

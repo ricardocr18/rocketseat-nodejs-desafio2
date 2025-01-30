@@ -25,27 +25,10 @@ export function Consult() {
     navigate(-1);
   };
 
-  /* const deletarRefeicao = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/refeicao", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({_id: refeicao._id}),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Refeição deletada com sucesso:", data);
-        navigate("/home");
-      } else {
-        console.error("Erro ao deletar refeição:", response.status);
-      }
-    } catch (error) {
-      console.error("Erro ao deletar refeição:", error);
-    }
-  }; */
-
+  const goToSnackEdit = () => {
+    navigate("/snackEdit", {state: refeicao});
+  };
+  
   const deletarRefeicao = async () => {
     try {
       if (!refeicao.id) {
@@ -95,6 +78,7 @@ export function Consult() {
           <div
             className="button"
             onClick={() => {
+              goToSnackEdit()
               console.log("Clicou no botão");
             }}
           >
